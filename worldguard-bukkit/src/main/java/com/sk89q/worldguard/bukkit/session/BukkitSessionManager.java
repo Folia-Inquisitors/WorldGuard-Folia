@@ -28,6 +28,8 @@ import com.sk89q.worldguard.bukkit.event.player.ProcessPlayerEvent;
 import com.sk89q.worldguard.bukkit.util.Entities;
 import com.sk89q.worldguard.session.AbstractSessionManager;
 import com.sk89q.worldguard.session.Session;
+import io.github.projectunified.minelib.scheduler.common.util.Platform;
+import io.github.projectunified.minelib.scheduler.entity.EntityScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -68,7 +70,12 @@ public class BukkitSessionManager extends AbstractSessionManager implements Runn
     public void run() {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-            get(localPlayer).tick(localPlayer);
+            Runnable runnable = () -> get(localPlayer).tick(localPlayer);
+            if (Platform.FOLIA.isPlatform()) {
+                EntityScheduler.get(WorldGuardPlugin.inst(), player).run(runnable);
+            } else {
+                runnable.run();
+            }
         }
     }
 
