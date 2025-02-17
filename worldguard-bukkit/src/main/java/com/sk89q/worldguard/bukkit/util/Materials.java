@@ -1189,6 +1189,7 @@ public final class Materials {
                 || material == Material.SMOKER
                 || material == Material.CHISELED_BOOKSHELF
                 || material == Material.CRAFTER
+                || material == Material.DECORATED_POT
                 || Tag.ITEMS_CHEST_BOATS.isTagged(material)
                 || Tag.SHULKER_BOXES.isTagged(material);
     }

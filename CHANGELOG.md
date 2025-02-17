@@ -1,6 +1,6 @@
 # Changelog
 
-## 7.0.13 (beta)
+## 7.0.13
 
 * Update to 1.21.4
 * Remove max-stack-size bypass in stack command
@@ -8,6 +8,9 @@
 * Fix flame enchant being blocked as entity damage on the arrow itself.
 * More Paper-specific performance enhancements for hoppers.
 * Fix block-windcharge-explosions config option not doing anything.
+* Improvements to fishing rod protection.
+* More aggressive vehicle protection (vehicle-destroy now needs to be allowed for various non-destructive damage).
+* Move decorated pot usage from interact to chest-access.
 
 ## 7.0.12
 
