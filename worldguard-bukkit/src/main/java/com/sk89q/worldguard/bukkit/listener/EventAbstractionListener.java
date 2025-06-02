@@ -46,6 +46,7 @@ import com.sk89q.worldguard.bukkit.util.Events;
 import com.sk89q.worldguard.bukkit.util.Materials;
 import com.sk89q.worldguard.config.WorldConfiguration;
 import com.sk89q.worldguard.protection.flags.Flags;
+import io.github.projectunified.minelib.scheduler.location.LocationScheduler;
 import io.papermc.lib.PaperLib;
 import io.papermc.paper.event.entity.EntityPushedByEntityAttackEvent;
 import io.papermc.paper.event.player.PlayerOpenSignEvent;
@@ -1045,8 +1046,9 @@ public class EventAbstractionListener extends AbstractListener {
             }
 
             if (event.isCancelled() && causeHolder instanceof Hopper && wcfg.breakDeniedHoppers) {
-                Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(),
-                        () -> ((Hopper) causeHolder).getBlock().breakNaturally());
+                Hopper hopper = (Hopper) causeHolder;
+                Location location = hopper.getLocation();
+                LocationScheduler.get(getPlugin(), location).run(() -> hopper.getBlock().breakNaturally());
             } else {
                 entry.setCancelled(event.isCancelled());
             }

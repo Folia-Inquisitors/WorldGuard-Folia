@@ -23,6 +23,11 @@ dependencies {
 
     "implementation"(libs.paperLib)
     "implementation"(libs.bstats.bukkit)
+
+    "implementation"(libs.minelib.scheduler.canceller)
+    "implementation"(libs.minelib.scheduler.global)
+    "implementation"(libs.minelib.scheduler.entity)
+    "implementation"(libs.minelib.scheduler.location)
 }
 
 tasks.named<Copy>("processResources") {
@@ -38,9 +43,15 @@ tasks.named<ShadowJar>("shadowJar") {
         include(dependency(":worldguard-core"))
         include(dependency("org.bstats:"))
         include(dependency("io.papermc:paperlib"))
+        include(dependency("io.github.projectunified:minelib-scheduler-common"))
+        include(dependency("io.github.projectunified:minelib-scheduler-canceller"))
+        include(dependency("io.github.projectunified:minelib-scheduler-global"))
+        include(dependency("io.github.projectunified:minelib-scheduler-entity"))
+        include(dependency("io.github.projectunified:minelib-scheduler-location"))
 
         relocate("org.bstats", "com.sk89q.worldguard.bukkit.bstats")
         relocate("io.papermc.lib", "com.sk89q.worldguard.bukkit.paperlib")
+        relocate("io.github.projectunified.minelib", "com.sk89q.worldguard.bukkit.minelib")
     }
 }
 

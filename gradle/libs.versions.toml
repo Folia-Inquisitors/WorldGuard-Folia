@@ -52,6 +52,11 @@ fastutil = "it.unimi.dsi:fastutil:8.5.15!!"
 # may not be the same as the ones in the latest Bukkit API.
 snakeyaml = "org.yaml:snakeyaml:2.0"
 
+minelib-scheduler-canceller = "io.github.projectunified:minelib-scheduler-canceller:1.2.5"
+minelib-scheduler-global = "io.github.projectunified:minelib-scheduler-global:1.2.5"
+minelib-scheduler-entity = "io.github.projectunified:minelib-scheduler-entity:1.2.5"
+minelib-scheduler-location = "io.github.projectunified:minelib-scheduler-location:1.2.5"
+
 [libraries.worldedit-core]
 module = "com.sk89q.worldedit:worldedit-core"
 version.ref = "worldedit"

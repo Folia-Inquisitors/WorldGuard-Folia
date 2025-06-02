@@ -25,6 +25,9 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.session.MoveType;
 import com.sk89q.worldguard.session.Session;
+import io.github.projectunified.minelib.scheduler.common.util.Platform;
+import io.github.projectunified.minelib.scheduler.entity.EntityScheduler;
+import io.papermc.lib.PaperLib;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.AbstractHorse;
@@ -127,7 +130,15 @@ public class PlayerMoveListener extends AbstractListener {
 
                 player.teleport(override.clone().add(0, 1, 0));
 
-                Bukkit.getScheduler().runTaskLater(getPlugin(), () -> player.teleport(override.clone().add(0, 1, 0)), 1);
+                // TODO: Properly handle teleportation of passengers
+                EntityScheduler.get(getPlugin(), player).runLater(() -> {
+                    Location target = override.clone().add(0, 1, 0);
+                    if (Platform.FOLIA.isPlatform()) {
+                        PaperLib.teleportAsync(player, target);
+                    } else {
+                        player.teleport(target);
+                    }
+                }, 1);
             }
         }
     }
